@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <math.h>
 
-struct key
+typedef struct key
 {
     int n;
     int e;
     int d;
-};
+}key;
 
 
 int inverse(int n, int modulus) 
@@ -42,7 +42,7 @@ unsigned long long encrypt(int m, struct key* key)
 
 int main(int argc, char *argv[])
 {
-    struct key key;
+    key key;
     int p;
     int q;
 
@@ -58,6 +58,11 @@ int main(int argc, char *argv[])
     printf("Open message: %llu\n",m);
     keygen(p, q, &key);
     printf("Open key: {e,n} = {%d,%d}\nSecret key: {d,n}={%d,%d}\n",key.e,key.n,key.d,key.n);
+    if (key.d == 1) 
+    {
+        fprintf(stderr,"Bad input!\n");
+        return -1;
+    }
     c = encrypt(m, &key); 
     printf("Encrypted message: %llu\n", c);
     return 0;    
