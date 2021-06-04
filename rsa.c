@@ -30,7 +30,6 @@ int keygen(int p, int q, struct key* key)
 {
     int phi = (p-1)*(q-1);
     key->n = p*q;
-    key->e = 3;
     key->d = inverse(key->e,phi);;
     return 0;
 }
@@ -44,8 +43,16 @@ unsigned long long encrypt(int m, struct key* key)
 int main(int argc, char *argv[])
 {
     struct key key;
-    int p = 3557;
-    int q = 2579;
+    int p;
+    int q;
+
+    printf("Enter p:");
+    scanf ("%d", &p);
+    printf("Enter q:");
+    scanf ("%d", &q);
+    printf("Enter e:");
+    scanf ("%d", &key.e);
+
     unsigned long long m = 123; // Open text;
     unsigned long long c;
     printf("Open message: %llu\n",m);
